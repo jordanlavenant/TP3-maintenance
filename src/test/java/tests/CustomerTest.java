@@ -3,18 +3,15 @@ package tests;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
-import app.ChildrensMovie;
 import app.Customer;
 import app.Movie;
-import app.NewReleaseMovie;
-import app.RegularMovie;
 import app.Rental;
 
 public class CustomerTest {
 
     @Test
     public void testStatementForRegularMovie() {
-        Movie movie = new RegularMovie("The Godfather");
+        Movie movie = new Movie("The Godfather", Movie.REGULAR);
         Rental rental = new Rental(movie, 3);
         Customer customer = new Customer("John Doe");
         customer.addRental(rental);
@@ -26,7 +23,7 @@ public class CustomerTest {
 
     @Test
     public void testStatementForNewReleaseMovie() {
-        Movie movie = new NewReleaseMovie("Avengers: Endgame");
+        Movie movie = new Movie("Avengers: Endgame", Movie.NEW_RELEASE);
         Rental rental = new Rental(movie, 2);
         Customer customer = new Customer("Jane Doe");
         customer.addRental(rental);
@@ -38,7 +35,7 @@ public class CustomerTest {
 
     @Test
     public void testStatementForChildrensMovie() {
-        Movie movie = new ChildrensMovie("Frozen");
+        Movie movie = new Movie("Frozen", Movie.CHILDRENS);
         Rental rental = new Rental(movie, 4);
         Customer customer = new Customer("Alice");
         customer.addRental(rental);
@@ -48,11 +45,11 @@ public class CustomerTest {
 
     @Test
     public void testStatementForMultipleRentals() {
-        Movie movie1 = new RegularMovie("The Godfather");
+        Movie movie1 = new Movie("The Godfather", Movie.REGULAR);
         Rental rental1 = new Rental(movie1, 3);
-        Movie movie2 = new NewReleaseMovie("Avengers: Endgame");
+        Movie movie2 = new Movie("Avengers: Endgame", Movie.NEW_RELEASE);
         Rental rental2 = new Rental(movie2, 2);
-        Movie movie3 = new ChildrensMovie("Frozen");
+        Movie movie3 = new Movie("Frozen", Movie.CHILDRENS);
         Rental rental3 = new Rental(movie3, 4);
         Customer customer = new Customer("Bob");
         customer.addRental(rental1);
@@ -64,7 +61,7 @@ public class CustomerTest {
 
     @Test
     public void testStatementForRegularMovieMoreThanTwoDays() {
-        Movie movie = new RegularMovie("The Godfather");
+        Movie movie = new Movie("The Godfather", Movie.REGULAR);
         Rental rental = new Rental(movie, 4);
         Customer customer = new Customer("John Doe");
         customer.addRental(rental);
@@ -76,7 +73,7 @@ public class CustomerTest {
 
     @Test
     public void testStatementForChildrensMovieMoreThanThreeDays() {
-        Movie movie = new ChildrensMovie("Frozen");
+        Movie movie = new Movie("Frozen", Movie.CHILDRENS);
         Rental rental = new Rental(movie, 5);
         Customer customer = new Customer("Alice");
         customer.addRental(rental);
@@ -88,7 +85,7 @@ public class CustomerTest {
 
     @Test
     public void testStatementForNewReleaseMovieMoreThanOneDay() {
-        Movie movie = new NewReleaseMovie("Avengers: Endgame");
+        Movie movie = new Movie("Avengers: Endgame", Movie.NEW_RELEASE);
         Rental rental = new Rental(movie, 3);
         Customer customer = new Customer("Jane Doe");
         customer.addRental(rental);

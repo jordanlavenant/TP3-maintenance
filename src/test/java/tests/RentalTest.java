@@ -4,10 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import app.ChildrensMovie;
 import app.Movie;
-import app.NewReleaseMovie;
-import app.RegularMovie;
 import app.Rental;
 
 class RentalTest {
@@ -21,9 +18,9 @@ class RentalTest {
 
     @BeforeEach
     void setUp() {
-        movie1 = new RegularMovie("Regular Movie");
-        movie2 = new NewReleaseMovie("NewRelease Movie");
-        movie3 = new ChildrensMovie("Childrens Movie");
+        movie1 = new Movie("Regular Movie", Movie.REGULAR);
+        movie2 = new Movie("NewRelease Movie", Movie.NEW_RELEASE);
+        movie3 = new Movie("Childrens Movie", Movie.CHILDRENS);
 
         rental1 = new Rental(movie1, 5);
         rental2 = new Rental(movie2, 4);

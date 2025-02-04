@@ -1,40 +1,50 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.junit.jupiter.api.BeforeEach;
+import app.*;
 import org.junit.jupiter.api.Test;
-
-import app.ChildrensMovie;
-import app.Movie;
-import app.NewReleaseMovie;
-import app.RegularMovie;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MovieTest {
 
-    private Movie movie1;
-    private Movie movie2;
-    private Movie movie3;
-
-    @BeforeEach
-    void setUp() {
-        movie1 = new RegularMovie("Regular Movie");
-        movie2 = new NewReleaseMovie("NewRelease Movie");
-        movie3 = new ChildrensMovie("Childrens Movie");
+    @Test
+    void testRegularMovieCharge() {
+        Movie movie = new Movie("The Godfather", Movie.REGULAR);
+        assertEquals(2.0, movie.getCharge(2));
+        assertEquals(3.5, movie.getCharge(3));
     }
 
     @Test
-    public void testGetTitle() {
-        assertEquals("Regular Movie", movie1.getTitle());
-        assertEquals("NewRelease Movie", movie2.getTitle());
-        assertEquals("Childrens Movie", movie3.getTitle());
+    void testNewReleaseMovieCharge() {
+        Movie movie = new Movie("Avengers: Endgame", Movie.NEW_RELEASE);
+        assertEquals(6.0, movie.getCharge(2));
     }
 
     @Test
-    public void testGetFrequentRenterPoints() {
-        assertEquals(1, movie1.getFrequentRenterPoints(5));
-        assertEquals(1, movie2.getFrequentRenterPoints(1));
-        assertEquals(2, movie2.getFrequentRenterPoints(4));
-        assertEquals(1, movie3.getFrequentRenterPoints(1));
+    void testChildrenMovieCharge() {
+        Movie movie = new Movie("Frozen", Movie.CHILDRENS);
+        assertEquals(1.5, movie.getCharge(3));
+        assertEquals(3.0, movie.getCharge(4));
+    }
+
+    @Test
+    void testFrequentRenterPoints() {
+        Movie newRelease = new Movie("Avengers: Endgame", Movie.NEW_RELEASE);
+        assertEquals(1, newRelease.getFrequentRenterPoints(1));
+        assertEquals(2, newRelease.getFrequentRenterPoints(2));
+    }
+
+    @Test
+    void testMoviePriceCodeChange() {
+        Movie movie = new Movie("The Godfather", Movie.REGULAR);
+        movie.setPriceCode(Movie.NEW_RELEASE);
+        assertEquals(9.0, movie.getCharge(3));
+    }
+
+    @Test
+    void testInvalidPriceCode() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            new Movie("Invalid Movie", 999);
+        });
+        assertEquals("Invalid price code", exception.getMessage());
     }
 }

@@ -1,6 +1,13 @@
 # TP3 - Maintenance
+## Coverage
 
-## Maven build
+Rapport de couverture final :
+
+![coverage1](assets/coverage1.png)
+![coverage2](assets/coverage2.png)
+![coverage3](assets/coverage3.png)
+
+## Maven commands
 
 To build the project, run the following command:
 
@@ -9,7 +16,7 @@ To build the project, run the following command:
 mvn clean install
 ```
 
-## Tests
+### Tests
 
 To run the tests, run the following command:
 
@@ -18,7 +25,7 @@ To run the tests, run the following command:
 mvn test
 ```
 
-## Rapport de couverture de code
+### Coverage
 
 To generate the code coverage report, run the following command:
 
