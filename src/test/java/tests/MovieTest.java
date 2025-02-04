@@ -1,27 +1,40 @@
 package tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import app.ChildrensMovie;
 import app.Movie;
+import app.NewReleaseMovie;
+import app.RegularMovie;
 
 public class MovieTest {
 
+    private Movie movie1;
+    private Movie movie2;
+    private Movie movie3;
+
+    @BeforeEach
+    void setUp() {
+        movie1 = new RegularMovie("Regular Movie");
+        movie2 = new NewReleaseMovie("NewRelease Movie");
+        movie3 = new ChildrensMovie("Childrens Movie");
+    }
+
     @Test
     public void testGetTitle() {
-        Movie movie = new Movie("The Godfather", Movie.REGULAR);
-        assertEquals("The Godfather", movie.getTitle());
+        assertEquals("Regular Movie", movie1.getTitle());
+        assertEquals("NewRelease Movie", movie2.getTitle());
+        assertEquals("Childrens Movie", movie3.getTitle());
     }
 
     @Test
-    public void testGetPriceCode() {
-        Movie movie = new Movie("The Godfather", Movie.REGULAR);
-        assertEquals(Movie.REGULAR, movie.getPriceCode());
-    }
-
-    @Test
-    public void testSetPriceCode() {
-        Movie movie = new Movie("The Godfather", Movie.REGULAR);
-        movie.setPriceCode(Movie.NEW_RELEASE);
-        assertEquals(Movie.NEW_RELEASE, movie.getPriceCode());
+    public void testGetFrequentRenterPoints() {
+        assertEquals(1, movie1.getFrequentRenterPoints(5));
+        assertEquals(1, movie2.getFrequentRenterPoints(1));
+        assertEquals(2, movie2.getFrequentRenterPoints(4));
+        assertEquals(1, movie3.getFrequentRenterPoints(1));
     }
 }
